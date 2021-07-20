@@ -13,7 +13,7 @@ const Login = ({user, setUser, errorMessage, setErrorMessage}) => {
 
     const config = {
         method: 'POST',
-        url:'http://localhost:3001/',
+        url:'https://pixel-vision-assignment.herokuapp.com/',
         headers: {
             'Content-Type': 'application/json'
         },
