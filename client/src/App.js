@@ -5,14 +5,15 @@ import Welcome from './Welcome'
 
 const App = () => {
 
-  const [userAuth, setUserAuth] = useState(false);
+  const [user, setUser] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null)
 
   return (
     <div style={{display: 'flex', justifyContent: 'center'}} className="pt-5">
-      {!userAuth?(
-        <Login setUserAuth={setUserAuth}/>
+      {!user?(
+        <Login user={user} setUser={setUser} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
       ):(
-        <Welcome/>
+        <Welcome user={user}/>
       )}
     </div>
   )
