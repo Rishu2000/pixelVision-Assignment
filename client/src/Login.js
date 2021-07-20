@@ -1,11 +1,10 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 
-const Login = ({setUserAuth}) => {
+const Login = ({user, setUser, errorMessage, setErrorMessage}) => {
 
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
 
     const data = JSON.stringify({
         'username': userName,
@@ -26,13 +25,16 @@ const Login = ({setUserAuth}) => {
         if(userName && password){
             axios(config)
             .then((res) => {
-                console.log(JSON.stringify(res.data))
+                console.log(JSON.stringify({"username2":res.data.username, "error2":res.data.errorMessage}))
+                setUser(res.data.username);
+                setErrorMessage(res.data.errorMessage);
             })
             .catch((err) => {
                 console.log(err)
             })
         }else{
-            setError('Please enter both username and password.')
+            setUser(null)
+            setErrorMessage('Please enter both username and password.')
         }
     }
 
@@ -40,9 +42,9 @@ const Login = ({setUserAuth}) => {
         <div>
             <form onSubmit={handleSubmit}>
                 <h1 className="mb-4">Login</h1>
-                {error && (
+                { !user &&  errorMessage && (
                     <pre className="border rounded alert alert-danger">
-                        {error}
+                        {errorMessage}
                     </pre>
                 )}
                 <div className="mb-3" style={{width: '400px'}}>
