@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.json('server is running')          //data[1].username
+    res.json('server is running')          
 })
 
 app.post('/', (req, res) => {
