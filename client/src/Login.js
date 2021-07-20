@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import axios from 'axios'
 
 const Login = ({setUserAuth}) => {
 
@@ -6,10 +7,30 @@ const Login = ({setUserAuth}) => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
+    const data = JSON.stringify({
+        'username': userName,
+        'password': password
+    })
+
+    const config = {
+        method: 'POST',
+        url:'http://localhost:3001/',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: data
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if(userName && password){
-            setUserAuth(true);
+            axios(config)
+            .then((res) => {
+                console.log(JSON.stringify(res.data))
+            })
+            .catch((err) => {
+                console.log(err)
+            })
         }else{
             setError('Please enter both username and password.')
         }
